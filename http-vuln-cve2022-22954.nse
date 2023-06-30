@@ -1,4 +1,4 @@
-author = {"Mr_Hackux", " <hackuxe@gmail.com>","LUNIX Security"}
+author = {"Mr_Hackux", "Balgo Security"}
 license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
 categories = {"vuln", "safe"}
 
