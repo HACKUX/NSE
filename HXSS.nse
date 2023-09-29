@@ -7,8 +7,8 @@ local vulns = require "vulns"
 local table = require "table"
 local io = require "io"
 
-local file = io.open("/sdcard/Nmap/data/xss.txt", "a") -- Ouvre le fichier en mode ajout
-local file2 = io.open("/sdcard/Nmap/data/xss.html", "a")
+local file = io.open("xss.txt", "a") -- Ouvre le fichier en mode ajout
+local file2 = io.open("xss.html", "a")
 
 local function extract_urls(response)
   local urls = {}
